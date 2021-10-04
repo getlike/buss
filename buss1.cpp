@@ -4,7 +4,7 @@
 #include <OLED_I2C.h> // Подключаем библиотеку OLED_I2C для работы со шрифтами и графикой
 
 OLED myOLED(4, 3, 4);       // Определяем пины I2C интерфейса: UNO и NANO -- SDA - пин A4, SCL - пин A5; MEGA -- SDA - пин 20, SCL - пин 21
-extern uint8_t RusFont[];   // Подключаем русский шрифт
+//extern uint8_t RusFont[];   // Подключаем русский шрифт
 extern uint8_t SmallFont[]; // Подключаем латинский шрифтом
 
 #define SS_PIN 10
@@ -22,7 +22,8 @@ void setup(){
   Serial.begin(9600);
   SPI.begin();     // Init SPI bus
   rfid.PCD_Init(); // Init MFRC522
-
+  myOLED.begin(); // Инициализируем библиотеку OLED_I2C
+  printOled("online");  
 }
 
 void loop(){
@@ -33,18 +34,18 @@ void loop(){
 }
 
 void readRFID(){
-  myOLED.begin(); // Инициализируем библиотеку OLED_I2C
+ 
   rfid.PICC_ReadCardSerial();
   Serial.print(F("\nPICC type: "));
   MFRC522::PICC_Type piccType = rfid.PICC_GetType(rfid.uid.sak);
   Serial.println(rfid.PICC_GetTypeName(piccType)); //тип карты
   // Check is the PICC of Classic MIFARE type
-  if (piccType != MFRC522::PICC_TYPE_MIFARE_MINI &&
-      piccType != MFRC522::PICC_TYPE_MIFARE_1K &&
-      piccType != MFRC522::PICC_TYPE_MIFARE_4K){
-        Serial.println(F("Your tag is not of type MIFARE Classic."));
-        return;
-  }
+//  if (piccType != MFRC522::PICC_TYPE_MIFARE_MINI &&
+//      piccType != MFRC522::PICC_TYPE_MIFARE_1K &&
+//      piccType != MFRC522::PICC_TYPE_MIFARE_4K){
+//        Serial.println(F("Your tag is not of type MIFARE Classic."));
+//        return;
+//  }
   Serial.println("Scanned PICC's UID:");
   printDec(rfid.uid.uidByte, rfid.uid.size); //вывод карты
 

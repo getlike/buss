@@ -1,0 +1,19 @@
+
+C:\Users\User\Documents\Arduino\buss\buss.ino: In function 'void setup()':
+buss:26:3: error: 'printOled' was not declared in this scope
+   printOled("online");
+   ^~~~~~~~~
+C:\Users\User\Documents\Arduino\buss\buss.ino:26:3: note: suggested alternative: 'printDec'
+   printOled("online");
+   ^~~~~~~~~
+   printDec
+C:\Users\User\Documents\Arduino\buss\buss.ino: In function 'void readRFID()':
+buss:58:3: error: 'printOled' was not declared in this scope
+   printOled(userid);
+   ^~~~~~~~~
+C:\Users\User\Documents\Arduino\buss\buss.ino:58:3: note: suggested alternative: 'printDec'
+   printOled(userid);
+   ^~~~~~~~~
+   printDec
+exit status 1
+'printOled' was not declared in this scope
